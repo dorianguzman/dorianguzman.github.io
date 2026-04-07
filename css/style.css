@@ -1,0 +1,575 @@
+/* ==========================================
+   MINIMALISTIC PROFESSIONAL CV - DORIAN GUZMAN
+   Light mode, generous spacing, subtle animations
+   ========================================== */
+
+/* CSS Variables */
+:root {
+    --color-bg: #FFFFFF;
+    --color-surface: #F8FAFC;
+    --color-text: #0F172A;
+    --color-text-muted: #64748B;
+    --color-accent: #0891B2;
+    --color-border: #E2E8F0;
+
+    --font-heading: 'Archivo', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+
+    --transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    --max-width: 1100px;
+    --section-padding: 120px;
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Container */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Section Titles */
+.section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 4rem;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+}
+
+/* ==========================================
+   HERO SECTION
+   ========================================== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+    background: var(--color-bg);
+}
+
+.hero-content {
+    text-align: center;
+}
+
+/* Profile Image */
+.profile-wrapper {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 3rem;
+    position: relative;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--color-border);
+    transition: var(--transition);
+}
+
+.profile-wrapper:hover .profile-img {
+    border-color: var(--color-accent);
+    transform: scale(1.05);
+}
+
+/* Hero Text */
+.hero-name {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+}
+
+.hero-headline {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    color: var(--color-text-muted);
+    margin-bottom: 3rem;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+/* Hero Links */
+.hero-links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: var(--color-bg);
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.link-btn:hover {
+    background: var(--color-surface);
+    border-color: var(--color-accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(8, 145, 178, 0.15);
+}
+
+/* ==========================================
+   TECH STACK SECTION
+   ========================================== */
+.tech-stack {
+    padding: var(--section-padding) 0;
+    background: var(--color-surface);
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+}
+
+.tech-category {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    transition: var(--transition);
+}
+
+.tech-category:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 8px 32px rgba(8, 145, 178, 0.1);
+    transform: translateY(-8px);
+}
+
+.tech-category-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+}
+
+.tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.tech-badge {
+    padding: 0.625rem 1.25rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.tech-badge:hover {
+    background: var(--color-accent);
+    color: white;
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   EXPERIENCE SECTION
+   ========================================== */
+.experience {
+    padding: var(--section-padding) 0;
+    background: var(--color-bg);
+}
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.experience-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    transition: var(--transition);
+    position: relative;
+}
+
+.experience-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: var(--color-accent);
+    border-radius: 16px 0 0 16px;
+    transition: height 0.6s ease;
+}
+
+.experience-card:hover::before {
+    height: 100%;
+}
+
+.experience-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 8px 32px rgba(8, 145, 178, 0.1);
+    transform: translateY(-8px);
+}
+
+.company-name {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+}
+
+.role-title {
+    font-size: 1.125rem;
+    color: var(--color-accent);
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+}
+
+.role-description {
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.role-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+}
+
+.role-badge {
+    padding: 0.5rem 1rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+/* ==========================================
+   EDUCATION SECTION
+   ========================================== */
+.education {
+    padding: var(--section-padding) 0;
+    background: var(--color-surface);
+}
+
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.education-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.education-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 8px 32px rgba(8, 145, 178, 0.1);
+    transform: translateY(-8px);
+}
+
+.degree-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.degree-title {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    color: var(--color-text);
+}
+
+.degree-description {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+}
+
+/* ==========================================
+   CONTACT SECTION
+   ========================================== */
+.contact {
+    padding: var(--section-padding) 0;
+    background: var(--color-bg);
+}
+
+.contact-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-text {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    margin-bottom: 3rem;
+    line-height: 1.8;
+}
+
+/* Email Form */
+.email-form {
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.email-input {
+    flex: 1;
+    padding: 1.25rem 1.75rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.email-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px rgba(8, 145, 178, 0.1);
+}
+
+.submit-btn {
+    padding: 1.25rem 2.5rem;
+    background: var(--color-accent);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: var(--transition);
+}
+
+.submit-btn:hover {
+    background: #0E7490;
+    box-shadow: 0 8px 24px rgba(8, 145, 178, 0.3);
+    transform: translateY(-4px);
+}
+
+.btn-arrow {
+    transition: transform 0.3s ease;
+}
+
+.submit-btn:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+.form-note {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+}
+
+/* Thank You Message */
+.thank-you-message {
+    display: none;
+    text-align: center;
+}
+
+.thank-you-message.show {
+    display: block;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: var(--color-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: white;
+}
+
+.success-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+}
+
+.success-text {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+}
+
+.download-btn {
+    padding: 1.25rem 2.5rem;
+    background: var(--color-accent);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: var(--transition);
+}
+
+.download-btn:hover {
+    background: #0E7490;
+    box-shadow: 0 8px 24px rgba(8, 145, 178, 0.3);
+    transform: translateY(-4px);
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+.footer {
+    padding: 3rem 0;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+}
+
+.footer-text {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+    :root {
+        --section-padding: 80px;
+    }
+
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 4rem 0;
+    }
+
+    .profile-wrapper {
+        width: 160px;
+        height: 160px;
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        margin-bottom: 3rem;
+    }
+
+    .form-group {
+        flex-direction: column;
+    }
+
+    .submit-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .tech-grid,
+    .experience-grid,
+    .education-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* ==========================================
+   PRINT STYLES
+   ========================================== */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    .link-btn,
+    .email-form,
+    .thank-you-message {
+        display: none !important;
+    }
+
+    .hero,
+    .tech-stack,
+    .experience,
+    .education,
+    .contact {
+        padding: 2rem 0;
+        page-break-inside: avoid;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

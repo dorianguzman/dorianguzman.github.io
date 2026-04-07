@@ -18,14 +18,15 @@ Personal website and CV for Dorian Guzman - showcasing experience in agentic AI 
 
 ```
 dorianguzman.github.io/
-├── index.html           # Main CV/portfolio page
+├── index.html           # Main CV/portfolio page (tech-focused terminal aesthetic)
 ├── css/
-│   └── style.css       # Styles
+│   └── style.css       # Styles (dark slate + green accent, cyberpunk terminal aesthetic)
 ├── js/
-│   └── main.js         # Optional interactivity
+│   └── main.js         # GSAP animations, email wall, scroll effects
 ├── assets/
-│   ├── images/         # Photos, logos
-│   └── docs/           # Downloadable CV PDF
+│   ├── images/         # Profile image
+│   │   └── profile.png
+│   └── pdf/            # Downloadable CV PDF (to be added)
 ├── tasks/              # Project management docs
 ├── CLAUDE.md           # This file
 └── README.md
@@ -61,11 +62,18 @@ git push origin main
 
 ## Design Principles
 
-- Clean, professional, scannable
-- Mobile-responsive
-- Fast loading (no heavy frameworks)
-- Printable (CSS print styles)
-- Accessible (semantic HTML, ARIA labels)
+- **Aesthetic:** Sophisticated tech executive meets terminal interface - refined cyberpunk (Bloomberg Terminal meets Matrix)
+- **Visual Identity:** Dark slate backgrounds (#0F172A, #1E293B, #020617) with vibrant green accents (#22C55E)
+- **Typography:** Archivo (headings) + Space Grotesk (body) from Google Fonts
+- **Features:**
+  - Animated terminal typing effect ("whoami")
+  - Profile image with rotating glowing tech border
+  - Grid background pattern + scan line animations
+  - Email wall for CV download (localStorage-based)
+  - GSAP scroll animations with ScrollTrigger
+  - Scroll progress bar
+- **Tech Stack:** Vanilla HTML/CSS/JS + GSAP 3.12.5
+- Mobile-responsive, printable (CSS print styles), accessible (semantic HTML, ARIA labels)
 
 ## Git Safety
 
