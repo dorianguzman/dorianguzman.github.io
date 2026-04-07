@@ -18,6 +18,14 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Scroll-Driven Video Background -->
+    <div class="video-background">
+        <video id="scrollVideo" preload="auto" muted playsinline>
+            <source src="assets/videos/hero.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="container">
@@ -28,7 +36,8 @@
                 </div>
 
                 <h1 class="hero-name">Dorian Guzman</h1>
-                <p class="hero-headline">Agentic AI Systems end-to-end | Quantitative Research<br>HSG MBA | PhD in Optimization</p>
+                <p class="hero-headline">Agentic AI Systems end-to-end | Quantitative Research</p>
+                <p class="hero-credentials">HSG MBA | PhD in Optimization</p>
 
                 <div class="hero-links">
                     <a href="https://www.linkedin.com/in/dorianguzmanrazo/" target="_blank" class="link-btn" aria-label="LinkedIn Profile">
@@ -45,6 +54,14 @@
                     </a>
                 </div>
             </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <span class="scroll-text">Scroll</span>
+            <svg class="scroll-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
         </div>
     </section>
 

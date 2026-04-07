@@ -7,32 +7,193 @@
 gsap.registerPlugin(ScrollTrigger);
 
 // ==========================================
-// HERO ANIMATIONS - Gentle entrance
+// SCROLL-DRIVEN VIDEO PLAYBACK
 // ==========================================
+const video = document.getElementById('scrollVideo');
+const videoDuration = 15; // 15 seconds
+
+// Preload video metadata
+video.addEventListener('loadedmetadata', () => {
+    console.log('Video loaded - Duration:', video.duration, 'seconds');
+
+    // Create ScrollTrigger for video scrubbing
+    ScrollTrigger.create({
+        trigger: 'body',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 0.5, // Smooth scrubbing with 0.5s delay
+        onUpdate: (self) => {
+            // Map scroll progress (0-1) to video time (0-videoDuration)
+            const targetTime = self.progress * video.duration;
+
+            // Only update if video is ready and time is valid
+            if (video.readyState >= 2 && !isNaN(targetTime)) {
+                video.currentTime = targetTime;
+            }
+        }
+    });
+});
+
+// Handle video loading errors
+video.addEventListener('error', (e) => {
+    console.error('Video failed to load:', e);
+});
+
+// ==========================================
+// HERO ANIMATIONS - Apple-Level Sophistication
+// ==========================================
+
+// Set initial states - all hero elements start invisible with transforms
+gsap.set('.profile-img', {opacity: 0, scale: 0.8});
+gsap.set('.hero-name', {opacity: 0, y: 40});
+gsap.set('.hero-headline', {opacity: 0, y: 30});
+gsap.set('.hero-credentials', {opacity: 0, y: 20});
+gsap.set('.link-btn', {opacity: 0, y: 20});
+
 const heroTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-heroTimeline
-    .from('.profile-wrapper', {
-        y: 20,
-        opacity: 0,
-        duration: 0.8
-    })
-    .from('.hero-name', {
-        y: 20,
-        opacity: 0,
-        duration: 0.8
-    }, '-=0.4')
-    .from('.hero-headline', {
-        y: 20,
-        opacity: 0,
-        duration: 0.6
-    }, '-=0.4')
-    .from('.link-btn', {
-        y: 20,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.15
-    }, '-=0.3');
+// Profile image entrance with elastic bounce
+heroTimeline.to('.profile-img', {
+    scale: 1,
+    opacity: 1,
+    duration: 1,
+    ease: 'back.out(1.4)'
+});
+
+// Name entrance - dramatic reveal
+heroTimeline.to('.hero-name', {
+    y: 0,
+    opacity: 1,
+    duration: 1
+}, '-=0.5');
+
+// Headline stagger - refined timing
+heroTimeline.to('.hero-headline', {
+    y: 0,
+    opacity: 1,
+    duration: 0.8
+}, '-=0.6');
+
+// Credentials subtle entrance
+heroTimeline.to('.hero-credentials', {
+    y: 0,
+    opacity: 1,
+    duration: 0.7
+}, '-=0.5');
+
+// Buttons stagger - smooth cascade (appear LAST after credentials)
+heroTimeline.to('.link-btn', {
+    y: 0,
+    opacity: 1,
+    duration: 0.6,
+    stagger: 0.1
+}, '-=0.4');
+
+// ==========================================
+// SCROLL INDICATOR ANIMATIONS
+// ==========================================
+
+// Bounce animation for arrow
+gsap.to('.scroll-arrow', {
+    y: 8,
+    duration: 0.8,
+    ease: 'sine.inOut',
+    yoyo: true,
+    repeat: -1
+});
+
+// Fade in after hero animation completes
+gsap.from('.scroll-indicator', {
+    opacity: 0,
+    y: -20,
+    duration: 0.8,
+    delay: 2.5, // After hero animation
+    ease: 'power2.out'
+});
+
+// Fade out on scroll
+ScrollTrigger.create({
+    trigger: '.hero',
+    start: 'top top',
+    end: '+=200',
+    scrub: true,
+    onUpdate: (self) => {
+        gsap.to('.scroll-indicator', {
+            opacity: 0.8 - (self.progress * 0.8),
+            y: self.progress * 30
+        });
+    }
+});
+
+// ==========================================
+// CONTINUOUS FLOAT ANIMATION - Profile Image
+// ==========================================
+gsap.to('.profile-img', {
+    y: -10,
+    duration: 3,
+    yoyo: true,
+    repeat: -1,
+    ease: 'sine.inOut'
+});
+
+// ==========================================
+// SCROLL PARALLAX - Hero Elements
+// Initialized AFTER hero timeline completes to prevent conflicts
+// ==========================================
+heroTimeline.eventCallback('onComplete', () => {
+    ScrollTrigger.create({
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1,
+        onUpdate: (self) => {
+            const progress = self.progress;
+
+            // Profile scales down and fades (starts at scale:1, opacity:1 when progress=0)
+            gsap.set('.profile-img', {
+                scale: 1 - (progress * 0.1),
+                opacity: 1 - (progress * 0.4)
+            });
+
+            // Name moves up (parallax effect) - starts at y:0 when progress=0
+            gsap.set('.hero-name', {
+                y: -progress * 40
+            });
+
+            // Headline subtle parallax - starts at y:0, opacity:1 when progress=0
+            gsap.set('.hero-headline, .hero-credentials', {
+                y: -progress * 20,
+                opacity: 1 - (progress * 0.5)
+            });
+
+            // Buttons fade faster - starts at opacity:1 when progress=0, fades to 0.2
+            gsap.set('.link-btn', {
+                opacity: 1 - (progress * 0.8)
+            });
+        }
+    });
+});
+
+// ==========================================
+// BUTTON HOVER EFFECTS - GSAP Enhanced
+// ==========================================
+document.querySelectorAll('.link-btn').forEach(button => {
+    button.addEventListener('mouseenter', () => {
+        gsap.to(button, {
+            scale: 1.02,
+            duration: 0.3,
+            ease: 'power2.out'
+        });
+    });
+
+    button.addEventListener('mouseleave', () => {
+        gsap.to(button, {
+            scale: 1,
+            duration: 0.3,
+            ease: 'power2.out'
+        });
+    });
+});
 
 // ==========================================
 // SECTION TITLE ANIMATIONS - Fade in on scroll
