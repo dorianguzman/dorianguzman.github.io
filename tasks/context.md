@@ -34,6 +34,27 @@
 - Had to use port 8001 instead
 - **Rule**: If `python3 -m http.server 8000` fails with "Address already in use", try 8001, 8080, 3000
 
+### [2026-04-07] | Video z-index layering confusion | Use position:fixed + low z-index for background video
+- Initially tried z-index:-1 which made video disappear behind body
+- Spent time debugging when the issue was simple positioning
+- **Rule**: Background video needs `position: fixed; z-index: 1;` with content sections at `z-index: 10;`
+- **Rule**: Negative z-index values can cause elements to render behind parent containers
+
+### [2026-04-07] | Video scrubbing implementation requires precise setup | Follow working pattern exactly
+- Implemented video scrubbing with ScrollTrigger - works when done correctly
+- Critical: Must use `getCurrentTime()` utility to calculate normalized progress across total document height
+- Critical: ScrollTrigger must pin sections, calculate progress per section, seek video to that progress
+- **Rule**: Don't reinvent video scrubbing - the pattern that works is: pin section → calculate progress (0-1) → video.currentTime = progress * duration
+- **Rule**: Video must be preloaded and canplaythrough before scrubbing works smoothly
+
+### [2026-04-07] | Text visibility over video background | Color/opacity/contrast issue not yet resolved
+- Removed card backgrounds (rgba backgrounds) to try plain text approach
+- Text in tech stack, experience, education sections NOT visible over video
+- Contact section text IS visible (uses same color/weight)
+- **Issue**: Unclear why some sections show text and others don't - not z-index (contact works)
+- **Rule**: When text disappears over video, check: (1) color contrast, (2) opacity values, (3) z-index layering, (4) backdrop-filter interference
+- **Next session**: Debug by inspecting computed styles on visible vs invisible text to find the difference
+
 ---
 
 ## Log Format
