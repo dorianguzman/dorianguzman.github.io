@@ -68,26 +68,23 @@ Last updated: 2026-04-07
 
 ## Next Session
 
-**CRITICAL - Fix Text Visibility:**
-1. Debug why text in tech stack, experience, education sections is NOT visible
-   - Contact section text IS visible with same styling
-   - Inspect computed styles on both working and non-working text
-   - Check: color values, opacity, text-shadow, any inherited properties
-   - Likely solution: ensure proper contrast or add text-shadow/backdrop for visibility
-2. Once text is visible, can optionally add subtle card backgrounds back
+**PRIORITY: Content Improvement**
+1. Review and refine all copy:
+   - Hero headline and credentials
+   - Tech stack categories and badges
+   - Experience descriptions (make them more compelling and specific)
+   - Education descriptions
+   - Contact section copy
+2. Ensure content accurately represents skills and experience
+3. Make descriptions more specific and achievement-focused
+4. Polish tone and voice for C-level audience
 
-**Then:**
-3. Create favicon (Cloudflare Flux or canvas-design)
-4. Create OpenGraph image (Cloudflare Flux or canvas-design)
-5. Add meta tags to index.html
-6. Test locally one more time
-7. Commit all changes to git
-8. Deploy to GitHub Pages
-
-**Finally:**
-9. Create PDF CV
-10. Update download button in contact section
-11. Final testing and polish
+**Then: Assets & Final Polish**
+5. Create favicon (Cloudflare Flux or canvas-design)
+6. Create OpenGraph image
+7. Add meta tags
+8. Create PDF CV
+9. Final testing and deployment
 
 ## User Preferences & Corrections
 
