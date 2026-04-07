@@ -214,46 +214,61 @@ gsap.utils.toArray('.section-title').forEach(title => {
 // ==========================================
 // TECH STACK ANIMATIONS - Staggered reveal
 // ==========================================
-gsap.from('.tech-category', {
+// Set initial state for tech categories
+gsap.set('.tech-category', {opacity: 0, y: 30});
+
+// Animate to visible state on scroll
+gsap.to('.tech-category', {
     scrollTrigger: {
         trigger: '.tech-stack',
-        start: 'top 70%',
-        end: 'top 40%',
-        scrub: 1
+        start: 'top 80%',
+        toggleActions: 'play none none none'
     },
-    y: 20,
-    opacity: 0,
-    stagger: 0.15
+    y: 0,
+    opacity: 1,
+    duration: 0.8,
+    stagger: 0.15,
+    ease: 'power2.out'
 });
 
 // ==========================================
 // EXPERIENCE CARD ANIMATIONS - Smooth reveal
 // ==========================================
-gsap.from('.experience-card', {
+// Set initial state for experience cards
+gsap.set('.experience-card', {opacity: 0, y: 30});
+
+// Animate to visible state on scroll
+gsap.to('.experience-card', {
     scrollTrigger: {
         trigger: '.experience',
-        start: 'top 70%',
-        end: 'top 40%',
-        scrub: 1
+        start: 'top 80%',
+        toggleActions: 'play none none none'
     },
-    y: 20,
-    opacity: 0,
-    stagger: 0.15
+    y: 0,
+    opacity: 1,
+    duration: 0.8,
+    stagger: 0.15,
+    ease: 'power2.out'
 });
 
 // ==========================================
 // EDUCATION ANIMATIONS - Clean entrance
 // ==========================================
-gsap.from('.education-card', {
+// Set initial state for education cards
+gsap.set('.education-card', {opacity: 0, y: 30});
+
+// Animate to visible state on scroll
+gsap.to('.education-card', {
     scrollTrigger: {
         trigger: '.education',
-        start: 'top 70%',
-        end: 'top 40%',
-        scrub: 1
+        start: 'top 80%',
+        toggleActions: 'play none none none'
     },
-    y: 20,
-    opacity: 0,
-    stagger: 0.2
+    y: 0,
+    opacity: 1,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: 'power2.out'
 });
 
 // ==========================================

@@ -4,30 +4,18 @@ Last updated: 2026-04-07
 
 ## Current State
 
-**Site Status:** Scroll-driven video implemented but text visibility issue, running locally on port 8001, NOT YET DEPLOYED
+**Site Status:** Text visibility fixed, running locally on port 8001, ready for assets & deployment
 
 **What's Done:**
-- ✅ Complete redesign: Tech/terminal → Minimalistic/professional/C-level
-- ✅ Light mode implementation (white backgrounds, clean executive aesthetic)
-- ✅ Typography: Archivo + Space Grotesk
-- ✅ Simplified GSAP animations (removed terminal effects, grid, scan lines)
-- ✅ Generated 10 keyframe images with Cloudflare Flux
-- ✅ Received 1 Gemini-generated video (sun-to-ground, 15 seconds)
-- ✅ Scroll-driven video implementation complete and working:
-  - Video scrubs smoothly with scroll position (0-15s mapped to full page scroll)
-  - Video is visible throughout entire page as background
-  - Hero section redesigned: headline above profile, proper typography hierarchy
-  - Buttons styled and positioned below profile
-  - Video positioned with `position: fixed; z-index: 1;`
-  - Content sections at `z-index: 10;`
-
-**What's In Progress:**
-- 🔴 **CRITICAL ISSUE**: Text NOT visible in tech stack, experience, education sections
-  - Contact section text IS visible (same color/weight)
-  - Removed card backgrounds (rgba) to try plain text - didn't fix it
-  - Not a z-index issue (contact section works with same z-index)
-  - Likely color/opacity/contrast issue but root cause unclear
-  - **Next step**: Inspect computed styles on visible (contact) vs invisible (tech/exp/edu) text
+- ✅ Complete redesign: Minimalistic/professional/C-level aesthetic
+- ✅ Light mode implementation
+- ✅ Scroll-driven video background working perfectly
+- ✅ **TEXT VISIBILITY FIXED**: Tech stack, experience, and education content now visible
+  - Root cause: `gsap.from()` with `toggleActions` wasn't firing
+  - Fix: Changed to `gsap.set()` + `gsap.to()` pattern (proper GSAP approach)
+- ✅ All sections animating correctly on scroll
+- ✅ Hero section with proper typography hierarchy
+- ✅ Contact section with email wall working
 
 **What's Not Started:**
 - ❌ Favicon creation

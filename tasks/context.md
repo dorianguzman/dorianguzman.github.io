@@ -55,6 +55,17 @@
 - **Rule**: When text disappears over video, check: (1) color contrast, (2) opacity values, (3) z-index layering, (4) backdrop-filter interference
 - **Next session**: Debug by inspecting computed styles on visible vs invisible text to find the difference
 
+### [2026-04-07] | GSAP gsap.from() with ScrollTrigger not firing animations | Use gsap.set() + gsap.to() pattern for scroll-triggered reveals
+- Built scroll-reveal animations using `gsap.from()` with `toggleActions: 'play none none none'`
+- Elements were stuck at `opacity: 0` - animations never fired when scrolled into view
+- Elements WERE in DOM with content, but had inline style `opacity: 0` applied by GSAP
+- Section titles worked (used `scrub: 1`), but cards didn't work (used `toggleActions`)
+- **Root cause**: `gsap.from()` with `toggleActions` has timing/triggering issues - elements stay at "from" state
+- **Solution**: Use `gsap.set()` to explicitly set initial state, then `gsap.to()` to animate to visible state
+- **Pattern**: `gsap.set('.element', {opacity: 0, y: 30})` then `gsap.to('.element', {opacity: 1, y: 0, scrollTrigger: {...}})`
+- This is the recommended GSAP pattern for scroll-triggered animations - more explicit and reliable
+- Applied to: `.tech-category`, `.experience-card`, `.education-card`
+
 ---
 
 ## Log Format
