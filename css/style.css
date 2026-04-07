@@ -49,8 +49,10 @@ body {
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: -1;
+    z-index: -10;
     overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
 .video-background video {
@@ -63,6 +65,7 @@ body {
     height: auto;
     transform: translate(-50%, -50%);
     object-fit: cover;
+    z-index: 1;
 }
 
 .video-overlay {
@@ -73,7 +76,7 @@ body {
     height: 100%;
     background: rgba(255, 255, 255, 0.15);
     pointer-events: none;
-    z-index: 1;
+    z-index: 2;
 }
 
 /* Container */
@@ -82,7 +85,7 @@ body {
     margin: 0 auto;
     padding: 0 2rem;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
 
 .hero .container {
@@ -111,7 +114,7 @@ body {
     padding: 4rem 0;
     background: transparent;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
 
 .hero-content {
@@ -130,13 +133,8 @@ body {
 .profile-img {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: 0;
     object-fit: cover;
-    border: 2px solid rgba(8, 145, 178, 0.4);
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.08),
-        0 8px 20px rgba(0, 0, 0, 0.04),
-        0 0 0 8px rgba(8, 145, 178, 0.1);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -147,22 +145,22 @@ body {
 /* Hero Text */
 .hero-name {
     font-family: var(--font-heading);
-    font-size: clamp(3.5rem, 8vw, 7.5rem);
-    font-weight: 700;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 600;
     margin-bottom: 32px;
-    letter-spacing: -0.04em;
-    color: var(--color-text);
-    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #64748B;
+    line-height: 1.2;
     will-change: transform, opacity;
 }
 
 .hero-headline {
-    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-    color: #475569;
-    margin-bottom: 16px;
-    line-height: 1.4;
-    font-weight: 400;
-    letter-spacing: -0.01em;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    color: var(--color-text);
+    margin-bottom: 48px;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -0.03em;
     will-change: transform, opacity;
     text-shadow:
         0 1px 2px rgba(0, 0, 0, 0.08),
@@ -177,6 +175,7 @@ body {
     line-height: 1.4;
     font-weight: 400;
     will-change: transform, opacity;
+    /* Now appears above profile image with proper spacing */
 }
 
 /* Hero Links */
@@ -249,13 +248,15 @@ body {
     padding: var(--section-padding) 0;
     background: transparent;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
 
 .tech-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2.5rem;
+    position: relative;
+    z-index: 1;
 }
 
 .tech-category {
@@ -264,6 +265,8 @@ body {
     border-radius: 16px;
     padding: 2.5rem;
     transition: var(--transition);
+    position: relative;
+    z-index: 1;
 }
 
 .tech-category:hover {
@@ -312,13 +315,15 @@ body {
     padding: var(--section-padding) 0;
     background: transparent;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
 
 .experience-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2.5rem;
+    position: relative;
+    z-index: 1;
 }
 
 .experience-card {
@@ -328,6 +333,7 @@ body {
     padding: 2.5rem;
     transition: var(--transition);
     position: relative;
+    z-index: 1;
 }
 
 .experience-card::before {
@@ -396,13 +402,15 @@ body {
     padding: var(--section-padding) 0;
     background: transparent;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
 
 .education-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2.5rem;
+    position: relative;
+    z-index: 1;
 }
 
 .education-card {
@@ -412,6 +420,8 @@ body {
     padding: 3rem;
     text-align: center;
     transition: var(--transition);
+    position: relative;
+    z-index: 1;
 }
 
 .education-card:hover {
@@ -445,7 +455,7 @@ body {
     padding: var(--section-padding) 0;
     background: transparent;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
 
 .contact-content {
@@ -622,11 +632,11 @@ body {
     }
 
     .hero-name {
-        margin-bottom: 24px;
+        margin-bottom: 20px;
     }
 
     .hero-headline {
-        margin-bottom: 12px;
+        margin-bottom: 24px;
     }
 
     .hero-credentials {
