@@ -1,95 +1,84 @@
-# Plan - dorianguzman.github.io
+# Project Plan - dorianguzman.github.io
+
+Last updated: 2026-04-07
 
 ## Goal
 
-Build a professional personal website and CV for Dorian Guzman that showcases his expertise in agentic AI systems, quantitative research, and AI product development.
+Build a minimalistic, professional, C-level personal CV website with Apple-style scroll-driven video transitions.
 
-**Target audience:** Recruiters, potential clients, collaborators, industry peers
+## Status: Phase 2 - Core Build (In Progress)
 
-**Success criteria:**
-- Clean, professional design that loads fast
-- Mobile-responsive
-- Highlights key experience and skills
-- Easy to find and share (dorianguzman.github.io)
-- Live on GitHub Pages
+### Phase 1: Foundation ✅ COMPLETE
+- [x] Project setup (README, CLAUDE.md, .gitignore, tasks/)
+- [x] Tech stack selected (Vanilla HTML/CSS/JS, GSAP, GitHub Pages)
+- [x] Initial design direction (CHANGED - was terminal, now minimalistic)
 
-## Phases
+### Phase 2: Design & Build 🔄 IN PROGRESS
+- [x] Redesign to minimalistic/professional/C-level aesthetic
+- [x] Light mode implementation (white, clean, generous spacing)
+- [x] HTML structure (hero, expertise, experience, education, contact)
+- [x] CSS styling (light mode, Archivo + Space Grotesk)
+- [x] Basic GSAP animations (subtle fade-ins, scroll reveals)
+- [x] Email wall with localStorage (for CV download)
+- [x] Responsive design (mobile-first)
+- [x] Generate keyframe images for video transitions (Cloudflare Flux)
+- [ ] **→ Receive 5 Gemini-generated transition videos** (BLOCKED - waiting for user)
+- [ ] Implement scroll-driven video playback (GSAP ScrollTrigger)
+- [ ] Canvas rendering for smooth 60fps video scrubbing
+- [ ] Performance optimization (preloading, lazy loading)
 
-### Phase 1: Foundation (CURRENT)
-- [x] Create GitHub repo (dorianguzman.github.io)
-- [x] Clone repo locally
-- [x] Add project documentation
-- [ ] Decide on design style and structure
+### Phase 3: Polish & Assets ⏳ NOT STARTED
+- [ ] Create favicon (Cloudflare Flux or canvas-design)
+- [ ] Create OpenGraph image (Cloudflare Flux or canvas-design)
+- [ ] Add meta tags (favicon links, OG tags, Twitter Card)
+- [ ] Create PDF CV
+- [ ] Link PDF to download button
+- [ ] Final testing (desktop, mobile, print)
 
-### Phase 2: Design & Build
-- [ ] Create HTML structure (index.html)
-- [ ] Design CSS (responsive, professional)
-- [ ] Add content:
-  - Header/headline
-  - About section
-  - Experience (NXT Partners, previous roles)
-  - Education (MBA, PhD)
-  - Skills
-  - Contact/links (LinkedIn, GitHub, email)
-- [ ] Optional: Projects showcase section
-- [ ] Optional: Downloadable PDF CV
-
-### Phase 3: Polish
-- [ ] Test responsive design (mobile, tablet, desktop)
-- [ ] Add CSS print styles (for printing CV)
-- [ ] Optimize for performance
-- [ ] Add favicon and meta tags
-- [ ] Test across browsers
-
-### Phase 4: Deploy & Launch
-- [ ] Push to GitHub main branch
+### Phase 4: Deploy ⏳ NOT STARTED
+- [ ] Commit all changes to git
+- [ ] Push to main branch
 - [ ] Verify GitHub Pages deployment
-- [ ] Test live site at dorianguzman.github.io
-- [ ] Share on LinkedIn
+- [ ] Test live site at https://dorianguzman.github.io
+- [ ] Update LinkedIn/GitHub with new CV link
 
-### Phase 5: Iterate (Future)
-- [ ] Add blog/articles section?
-- [ ] Add dark mode toggle?
-- [ ] Custom domain (dorianguzman.com)?
-- [ ] Analytics tracking?
+### Phase 5: Iterate ⏳ NOT STARTED
+- [ ] Gather feedback
+- [ ] Performance optimizations
+- [ ] Add analytics (if desired - Cloudflare Web Analytics or none)
+- [ ] Content updates as needed
 
-## Task Breakdown
+## Video Transition Workflow
 
-### 1. Design Decision
-- Choose style: modern/minimalist, bold/creative, classic/professional, or tech-focused
-- Decide: single-page or multi-page
-- Decide: include projects section?
+**Concept:** Seamless scroll-driven video background across entire site
 
-### 2. Content Preparation
-- Copy LinkedIn experience descriptions
-- List key skills to highlight
-- Gather project details (if showcasing projects)
-- Prepare headshot/profile photo (optional)
+**Sections & Videos:**
+1. **Hero** - Single point → Network (emergence)
+2. **Expertise** - Network → Organized streams (systematization)
+3. **Experience** - Streams → Complex patterns (growth)
+4. **Education** - Patterns → Geometric foundation (foundation)
+5. **Contact** - Foundation → Dispersing particles (opening)
 
-### 3. Build HTML/CSS
-- Semantic HTML structure
-- Mobile-first responsive CSS
-- Section organization (header, about, experience, education, skills, contact)
-- Typography and spacing
-- Color scheme aligned with design style
+**Implementation:**
+- Use GSAP ScrollTrigger to scrub videos based on scroll position
+- Pin each section while its video plays
+- Canvas rendering for smooth playback
+- Preload videos for instant scrubbing
 
-### 4. Content Population
-- Add all text content
-- Format and style
-- Add links (LinkedIn, GitHub)
-
-### 5. Test & Deploy
-- Local testing
-- Push to GitHub
-- Verify live deployment
+**Status:** Waiting for user to generate 5 videos with Gemini
 
 ## Skill Pipeline
 
-**Not applicable** - This is a simple HTML/CSS website, no skills needed
+**Creative Studio:**
+- UI UX Pro Max → Design direction (minimalistic/professional)
+- Cloudflare Flux → Keyframe images ✅ (10 images generated)
+- Gemini (external) → Video transitions (pending)
+- GSAP + ScrollTrigger → Scroll-driven playback (next)
 
-## Open Decisions
+## Notes
 
-- **Design style?**
-- **Single or multi-page?**
-- **Projects section?**
-- **PDF download?**
+- Original design (terminal aesthetic) was rejected
+- Redesigned to minimalistic/professional/C-level
+- Remotion videos were rejected (quality insufficient)
+- User will provide Gemini-generated videos instead
+- Site is ready for video integration once videos are received

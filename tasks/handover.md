@@ -1,63 +1,120 @@
-# Handover - dorianguzman.github.io
+# Session Handover - dorianguzman.github.io
+
+Last updated: 2026-04-07
 
 ## Current State
 
-**Status:** Project initialized, documentation added, website not yet built
+**Site Status:** Redesigned, running locally on port 8001, NOT YET DEPLOYED
 
-**Completed:**
-- ✓ Created GitHub repo: dorianguzman/dorianguzman.github.io
-- ✓ Cloned repo locally: /Users/dorianguzman/Work/repo/dorianguzman.github.io/
-- ✓ Added project documentation (README, CLAUDE.md, tasks/)
-- ✓ Configured git authentication (gh CLI as dorian014, access confirmed)
+**What's Done:**
+- ✅ Complete redesign: Tech/terminal → Minimalistic/professional/C-level
+- ✅ Light mode implementation (white backgrounds, clean executive aesthetic)
+- ✅ Typography: Archivo + Space Grotesk
+- ✅ Simplified GSAP animations (removed terminal effects, grid, scan lines)
+- ✅ Generated 10 keyframe images with Cloudflare Flux
+- ✅ Cleaned up assets directory
+- ✅ Ready for scroll-driven video implementation
 
-**In Progress:**
-- Website design and build
+**What's In Progress:**
+- ⏳ Waiting for 5 Gemini-generated transition videos from user
+- ⏳ Scroll-driven video implementation (deferred until videos ready)
 
-**Next Steps:**
-1. Design the personal website/CV page
-2. Create HTML/CSS structure
-3. Add content (experience, education, skills, projects)
-4. Test responsive design
-5. Deploy to GitHub Pages
-6. (Optional) Add downloadable PDF CV
+**What's Not Started:**
+- ❌ Favicon creation
+- ❌ OpenGraph meta tags
+- ❌ Git commit and deployment
+- ❌ PDF CV creation
 
-## Key Decisions Made
-
-**Site Structure:**
-- Single-page CV/portfolio (can expand to multi-page later)
-- No frameworks - vanilla HTML/CSS/JS for simplicity and speed
-- GitHub Pages deployment (auto from main branch)
-- URL: https://dorianguzman.github.io
-
-**Content Focus:**
-- Emphasize agentic AI systems and quantitative research
-- Highlight NXT Partners experience
-- Show breadth: crypto/DeFi, compliance, media, trading systems
-- Link to LinkedIn profile
+## Key Decisions
 
 **Design Direction:**
-- TBD - user to choose between modern/minimalist, bold/creative, classic/professional, or tech-focused
+- **Aesthetic:** Minimalistic/professional/C-level (Apple, Stripe, Linear-level polish)
+- **Color Palette:**
+  - Background: White (#FFFFFF)
+  - Text Primary: Near-black (#0F172A)
+  - Text Secondary: Warm slate (#64748B)
+  - Accent: Sophisticated blue (#0891B2)
+- **Animation Strategy:** Apple-style scroll-driven video transitions across entire site
+- **Video Creation Method:** Gemini image-to-video (better than Remotion)
+- **Image Generation:** Cloudflare Flux (new tool, replaces nano-banana-pro)
+
+**Technical Decisions:**
+- Single-page CV structure (kept)
+- Light mode only (no dark mode toggle)
+- Generous white space (120px section padding)
+- Subtle scroll animations (20px reveals, 0.6-0.8s durations)
+- GSAP + ScrollTrigger for video scrubbing
+- 5 videos total (one per section)
+
+## Files Overview
+
+**Core Website:**
+- `index.html` - Main CV page, light mode, clean structure
+- `css/style.css` - Light mode styles, generous spacing, minimal
+- `js/main.js` - Simplified GSAP animations
+- `assets/images/profile.png` - Profile photo (503 KB)
+- `assets/videos/` - Empty, ready for 5 Gemini videos
+
+**Documentation:**
+- `CLAUDE.md` - Project instructions (OUTDATED - still describes terminal aesthetic)
+- `README.md` - Project overview
+- `tasks/plan.md` - Project roadmap
+- `tasks/handover.md` - This file
+- `tasks/context.md` - Project learnings
+
+**Not Yet Created:**
+- `assets/favicon.svg` - Favicon (pending)
+- `assets/apple-touch-icon.png` - iOS icon (pending)
+- `assets/og-image.png` - OpenGraph preview (pending)
+- `assets/pdf/dorian-guzman-cv.pdf` - Downloadable CV (pending)
+
+## Next Session
+
+**Immediate Tasks:**
+1. Receive 5 Gemini-generated videos from user
+2. Implement scroll-driven video playback with GSAP ScrollTrigger:
+   - Pin each section while video scrubs
+   - Tie video playback to scroll position
+   - Canvas rendering for smooth 60fps
+   - Preload videos for performance
+3. Test scroll experience on desktop and mobile
+4. Optimize video loading and playback
+
+**Then:**
+5. Create favicon (Cloudflare Flux or canvas-design)
+6. Create OpenGraph image (Cloudflare Flux or canvas-design)
+7. Add meta tags to index.html
+8. Test locally one more time
+9. Commit all changes to git
+10. Deploy to GitHub Pages
+
+**Finally:**
+11. Create PDF CV
+12. Update download button in contact section
+13. Final testing and polish
 
 ## User Preferences & Corrections
 
-- User has two GitHub accounts: `dorianguzman` and `dorian014` (authenticated as dorian014, has access to both)
-- LinkedIn headline: "Agentic AI Systems end-to-end | Quantitative Research | HSG MBA | PhD in Optimization"
-- Prefers concise, scannable content (no walls of text)
+**From This Session:**
+- User wants minimalistic/professional/C-level, NOT tech/terminal aesthetic
+- User wants high-impact scroll-driven videos (Apple product page quality)
+- User prefers Gemini image-to-video over Remotion (better quality)
+- User wants light mode (white/neutral, clean, airy)
+- User wants subtle scroll effects (not aggressive animations)
 
-## Gotchas & Pitfalls
+## Gotchas
 
-- None yet (project just started)
+**Technical:**
+- Local server uses port 8001 (port 8000 was already in use)
+- Cloudflare Flux requires `--resize` flag for images > 512px
+- Remotion's 3D particle effects weren't realistic enough
+- Gemini image-to-video produces better quality transitions
+
+**Process:**
+- Site hasn't been committed or deployed yet - all changes are local
+- CLAUDE.md is outdated (still describes old terminal aesthetic)
+- User may need instructions for Gemini video generation
 
 ## Open Questions
 
-- **Design style preference?** (modern/minimalist, bold/creative, classic/professional, tech-focused)
-- **Single page or multi-page site?**
-- **Include projects section?** (showcase MediaDistrict, JetQ Labs, Zone AI, etc.?)
-- **Downloadable PDF CV?**
-
-## Files That Matter
-
-- **index.html** - Main website entry point (to be created)
-- **css/style.css** - Styling (to be created)
-- **tasks/plan.md** - Project roadmap and build plan
-- **CLAUDE.md** - Project instructions
+None - clear path forward once videos are ready.
