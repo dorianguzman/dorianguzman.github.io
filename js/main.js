@@ -10,33 +10,40 @@ gsap.registerPlugin(ScrollTrigger);
 // SCROLL-DRIVEN VIDEO PLAYBACK
 // ==========================================
 const video = document.getElementById('scrollVideo');
-const videoDuration = 15; // 15 seconds
 
-// Preload video metadata
-video.addEventListener('loadedmetadata', () => {
-    console.log('Video loaded - Duration:', video.duration, 'seconds');
+// Force video to start loading immediately
+video.load();
 
-    // Create ScrollTrigger for video scrubbing
-    ScrollTrigger.create({
-        trigger: 'body',
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 0.5, // Smooth scrubbing with 0.5s delay
-        onUpdate: (self) => {
-            // Map scroll progress (0-1) to video time (0-videoDuration)
-            const targetTime = self.progress * video.duration;
+// Set video to frame 0 immediately (don't wait for metadata)
+video.currentTime = 0;
 
-            // Only update if video is ready and time is valid
-            if (video.readyState >= 2 && !isNaN(targetTime)) {
-                video.currentTime = targetTime;
-            }
+// Create ScrollTrigger immediately (don't wait for loadedmetadata)
+ScrollTrigger.create({
+    trigger: 'body',
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: 0.5,
+    onUpdate: (self) => {
+        // Map scroll progress to video time
+        const targetTime = self.progress * video.duration;
+
+        // Only update if video is ready and time is valid
+        if (video.readyState >= 2 && !isNaN(targetTime)) {
+            video.currentTime = targetTime;
         }
-    });
+    }
+});
+
+// Log when video is ready
+video.addEventListener('loadedmetadata', () => {
+    console.log('✓ Video loaded - Duration:', video.duration, 'seconds');
+    // Ensure video starts at frame 0
+    video.currentTime = 0;
 });
 
 // Handle video loading errors
 video.addEventListener('error', (e) => {
-    console.error('Video failed to load:', e);
+    console.error('✗ Video failed to load:', e);
 });
 
 // ==========================================

@@ -644,7 +644,7 @@ body {
     }
 
     .scroll-indicator {
-        display: none;
+        bottom: 20px;
     }
 
     .section-title {
