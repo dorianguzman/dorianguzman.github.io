@@ -212,15 +212,15 @@ gsap.utils.toArray('.section-title').forEach(title => {
 });
 
 // ==========================================
-// TECH STACK ANIMATIONS - Staggered reveal
+// SKILLS & IMPACT ANIMATIONS - Staggered reveal
 // ==========================================
-// Set initial state for tech categories
-gsap.set('.tech-category', {opacity: 0, y: 30});
+// Set initial state for expertise categories
+gsap.set('.expertise-category', {opacity: 0, y: 30});
 
 // Animate to visible state on scroll
-gsap.to('.tech-category', {
+gsap.to('.expertise-category', {
     scrollTrigger: {
-        trigger: '.tech-stack',
+        trigger: '.skills-impact',
         start: 'top 80%',
         toggleActions: 'play none none none'
     },
@@ -286,78 +286,35 @@ gsap.from('.contact-content', {
 });
 
 // ==========================================
-// EMAIL WALL FUNCTIONALITY
+// WHATSAPP FORM HANDLER
 // ==========================================
-const emailForm = document.getElementById('emailForm');
-const emailInput = document.getElementById('emailInput');
-const thankYouMessage = document.getElementById('thankYouMessage');
-const downloadBtn = document.getElementById('downloadBtn');
+const whatsappForm = document.getElementById('whatsapp-form');
 
-// Check if user has already submitted email
-window.addEventListener('DOMContentLoaded', () => {
-    const hasSubmitted = localStorage.getItem('emailSubmitted');
+if (whatsappForm) {
+    whatsappForm.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-    if (hasSubmitted === 'true') {
-        showThankYouMessage();
-    }
-});
+        const name = document.getElementById('contact-name').value.trim();
+        const company = document.getElementById('contact-company').value.trim();
 
-// Handle form submission
-emailForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const email = emailInput.value.trim();
-
-    if (email && isValidEmail(email)) {
-        // Store email submission in localStorage
-        localStorage.setItem('emailSubmitted', 'true');
-        localStorage.setItem('userEmail', email);
-
-        // Show thank you message with animation
-        showThankYouMessage();
-
-        // Optional: Send email to your backend/analytics
-        console.log('Email submitted:', email);
-    }
-});
-
-// Email validation
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-// Show thank you message with GSAP animation
-function showThankYouMessage() {
-    gsap.to(emailForm, {
-        opacity: 0,
-        y: -20,
-        duration: 0.4,
-        onComplete: () => {
-            emailForm.style.display = 'none';
-            thankYouMessage.classList.add('show');
-
-            gsap.from(thankYouMessage, {
-                opacity: 0,
-                y: 20,
-                duration: 0.6,
-                ease: 'power3.out'
-            });
+        // Build WhatsApp message
+        let message;
+        if (company) {
+            message = `Hey Dorian, I am ${name} from ${company}. I found your website and I am interested in connecting.`;
+        } else {
+            message = `Hey Dorian, I am ${name}. I found your website and I am interested in connecting.`;
         }
+
+        // Encode message for URL
+        const encodedMessage = encodeURIComponent(message);
+
+        // WhatsApp URL with phone number and pre-filled message
+        const whatsappURL = `https://wa.me/4915739511230?text=${encodedMessage}`;
+
+        // Open WhatsApp in new tab
+        window.open(whatsappURL, '_blank');
     });
 }
-
-// Handle PDF download
-downloadBtn.addEventListener('click', () => {
-    // Create a placeholder alert (replace with actual PDF download logic)
-    alert('PDF CV download functionality will be implemented. For now, this is a placeholder.\n\nIn production, this would:\n1. Generate or fetch a PDF CV\n2. Trigger a download\n3. Track analytics');
-
-    // TODO: Implement actual PDF download
-    // Example:
-    // window.location.href = 'assets/pdf/dorian-guzman-cv.pdf';
-
-    // Or generate PDF dynamically using a library like jsPDF
-});
 
 // ==========================================
 // SMOOTH SCROLL TO SECTIONS
