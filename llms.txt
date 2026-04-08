@@ -1,0 +1,43 @@
+# Dorian Guzman
+
+> AI systems developer specializing in agentic systems, quantitative research, and optimization. HSG MBA and PhD in Optimization with experience in iGaming, DeFi, and energy sectors.
+
+## Profile
+
+- [Homepage](https://dorianguzman.github.io/): Professional CV and portfolio showcasing AI systems development expertise, quantitative research background, and business strategy experience. Includes detailed work history, education credentials, and technical skills.
+
+## Expertise
+
+- [Skills & Impact](https://dorianguzman.github.io/#skills): Covers four core areas - Strategic AI Implementation, Quantitative Research & Optimization, Agentic Systems Architecture, and Business Strategy & Execution. Details technical stack including Python, Node.js, Go, FastAPI, AWS, GCP, and relevant AI/ML frameworks.
+- [AI & Agentic Systems](https://dorianguzman.github.io/#skills): Specialization in LLMs, multi-agent architecture, RAG, fine-tuning, model optimization, and production ML infrastructure.
+- [Quantitative & Optimization](https://dorianguzman.github.io/#skills): Mathematical optimization, operations research, statistical modeling, risk management, and algorithmic design expertise.
+
+## Experience
+
+- [NXT Partners](https://dorianguzman.github.io/#experience): Co-founder building agentic AI systems for brand visibility in iGaming. Co-developed ClippingDistrict automated content distribution platform and established partnership with Latam Entertainment Group.
+- [Deep Q Digital](https://dorianguzman.github.io/#experience): Quantitative Systems Engineer role building P&L tracking systems for DeFi operations, backtesting infrastructure for trading strategies, and live trading systems in crypto markets.
+- [Energy Projects](https://dorianguzman.github.io/#experience): Head of Data Science developing genetic algorithm optimization for solar energy systems, digital twin models for photovoltaic systems with 6% power forecasting accuracy, and published peer-reviewed research.
+
+## Education
+
+- [MBA - University of St. Gallen](https://dorianguzman.github.io/#education): International management, leadership, and corporate finance with thesis on Risk Management for DeFi Liquidity Provisioning. Strategic foundations for AI transformation and emerging markets.
+- [PhD in Optimization](https://dorianguzman.github.io/#education): Specialized in genetic algorithms and mathematical optimization for complex systems. Published research on digital twinning and PV power forecasting. Featured in "Rising Stars in Energy Research: 2022".
+
+## Key Facts
+
+- Education: MBA from University of St. Gallen (HSG), PhD in Optimization (Energy Systems & Operations Research)
+- Co-founder at NXT Partners (AI systems for iGaming)
+- Former Quantitative Systems Engineer at Deep Q Digital (DeFi/crypto)
+- Former Head of Data Science at Energy Projects (solar optimization)
+- Technical expertise: Python, Node.js, Go, FastAPI, AWS, GCP, Kubernetes, Docker
+- Research areas: Agentic AI, multi-agent systems, quantitative research, mathematical optimization, DeFi, genetic algorithms
+- Published researcher in energy systems optimization
+- Featured in "Rising Stars in Energy Research: 2022"
+
+## Contact
+
+- Website: https://dorianguzman.github.io
+- LinkedIn: https://www.linkedin.com/in/dorianguzmanrazo/
+- GitHub: https://github.com/dorianguzman
+- GitHub: https://github.com/dorian014
+- WhatsApp: Available via contact form on website
