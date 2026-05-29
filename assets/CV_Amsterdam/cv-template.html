@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dorian Guzman - CV</title>
+    <style>
+        /* ATS-Optimized Styles - Simple, Clean, Parseable */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10pt;
+            line-height: 1.4;
+            color: #000000;
+            background: #ffffff;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.3in 0.5in 0.5in 0.5in;
+        }
+
+        /* Header */
+        .header {
+            position: relative;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 10px;
+            min-height: 120px;
+        }
+
+        .profile-photo {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .name {
+            font-size: 20pt;
+            font-weight: bold;
+            margin-bottom: 4px;
+            padding-right: 120px;
+        }
+
+        .title-line {
+            font-size: 10pt;
+            color: #333333;
+            margin-bottom: 8px;
+            padding-right: 120px;
+        }
+
+        .contact {
+            font-size: 9pt;
+            line-height: 1.6;
+            padding-right: 120px;
+        }
+
+        .contact a {
+            color: #000000;
+            text-decoration: none;
+        }
+
+        /* Section Headings */
+        h2 {
+            font-size: 12pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #000000;
+            padding-bottom: 4px;
+        }
+
+        /* Summary */
+        .summary {
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        /* Experience & Education Entries */
+        .entry {
+            margin-bottom: 16px;
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .company, .school {
+            font-weight: bold;
+            font-size: 10pt;
+        }
+
+        .dates {
+            font-style: italic;
+            font-size: 9pt;
+        }
+
+        .title, .degree {
+            font-size: 10pt;
+            margin-bottom: 4px;
+        }
+
+        .location {
+            font-size: 9pt;
+            color: #333333;
+            margin-bottom: 6px;
+        }
+
+        /* Bullet Points */
+        ul {
+            margin-left: 20px;
+            margin-top: 4px;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        /* Skills */
+        .skills-list {
+            columns: 2;
+            column-gap: 20px;
+        }
+
+        .skill-category {
+            margin-bottom: 8px;
+            break-inside: avoid;
+        }
+
+        .skill-category strong {
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* Publications */
+        .publication {
+            margin-bottom: 8px;
+            text-align: justify;
+        }
+
+        /* Print Optimization - Match Screen Rendering Exactly */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* Keep exact same dimensions as screen */
+            body {
+                padding: 0 0.02in 0.5in 0.02in !important;  /* top 0.05in, right 0.02in, bottom 0.5in, left 0.02in */
+                margin: 0 !important;
+                max-width: 8.5in !important;
+            }
+
+            /* Prevent page breaks inside important sections */
+            .entry, .skill-category, .header {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            h2 {
+                page-break-after: avoid;
+            }
+
+            /* Ensure images print */
+            img {
+                max-width: 100%;
+            }
+
+            /* Remove any links underlines in print */
+            a {
+                text-decoration: none !important;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <img src="../images/profile.png" alt="Dorian Guzman" class="profile-photo">
+    <div class="name">DORIAN GUZMAN</div>
+    <div class="title-line">Agentic AI Systems · Forward Deployed AI · Enterprise GenAI</div>
+    <div class="contact">
+        Amsterdam, Netherlands<br>
+        <a href="mailto:dorianeguzman@gmail.com">dorianeguzman@gmail.com</a> |
+        +49 157 39511230 |
+        <a href="https://linkedin.com/in/dorianguzmanrazo">linkedin.com/in/dorianguzmanrazo</a> |
+        <a href="https://dorianguzman.github.io">dorianguzman.github.io</a>
+    </div>
+</div>
+
+<!-- Professional Summary -->
+<h2>Professional Summary</h2>
+<div class="summary">
+AI builder and strategist specialising in deploying agentic systems within enterprise client environments. Combines deep technical execution (multi-agent systems, pipeline orchestration, MCP, vector databases, LLM observability) with business strategy to lead technical discovery and translate deployment realities into scalable solutions. PhD candidate in Data Science (optimization) and MBA from University of St. Gallen. Track record spans finance, media, compliance, and regulatory verticals, taking AI from prototype to production on Google Cloud.
+</div>
+
+<!-- Experience -->
+<h2>Professional Experience</h2>
+
+<div class="entry">
+    <div class="entry-header">
+        <div class="company">NXT Partners AI</div>
+        <div class="dates">April 2026 – Present</div>
+    </div>
+    <div class="title">Co-Founder</div>
+    <div class="location">Remote</div>
+    <ul>
+        <li>Architected and deployed multi-agent AI systems within client environments across content automation, compliance, and regulatory intelligence, using custom pipeline orchestration, LLMs, computer vision, and MCP to deliver autonomous workflows producing 100+ assets/week</li>
+<li>Led full-stack AI product development from technical discovery with business stakeholders through to production deployment, shipping AI-powered platforms across finance, energy, media, and regulatory verticals, resolving integration complexity and data readiness blockers</li>
+        <li>Advised enterprises new to AI on transformation strategy and agentic AI requirements, embedding with client teams to redesign workflows and deliver their first production-grade solutions</li>
+    </ul>
+</div>
+
+<div class="entry">
+    <div class="entry-header">
+        <div class="company">QStarlabs.ai</div>
+        <div class="dates">April 2025 – April 2026</div>
+    </div>
+    <div class="title">Lead Product Engineer</div>
+    <div class="location">Remote</div>
+    <ul>
+        <li>Joined as Lead Product Engineer for Personas, an enterprise AI agent platform enabling clients to create and deploy multimodal AI micro-influencers running autonomously across social media to execute scalable campaigns and drive brand engagement</li>
+        <li>Co-led technical strategy: designed, built, and implemented production-grade agentic systems integrating 1st-party and 3rd-party model providers, vector databases, and MCP into a unified enterprise platform</li>
+        <li>Embedded with enterprise clients to drive adoption, manage technical onboarding, and translate deployment realities into product improvements</li>
+    </ul>
+</div>
+
+<div class="entry">
+    <div class="entry-header">
+        <div class="company">Deep Q Digital</div>
+        <div class="dates">November 2023 – April 2026</div>
+    </div>
+    <div class="title">Quantitative Researcher</div>
+    <div class="location">Remote</div>
+    <ul>
+        <li>Built quantitative trading infrastructure for DeFi including P&L tracking, risk management, real-time position monitoring, backtesting engines, simulation frameworks, and automated performance reporting</li>
+        <li>Executed live high-frequency trading operations across crypto markets and DeFi protocols, maintaining low-latency execution systems, order management, and deployment and monitoring workflows</li>
+    </ul>
+</div>
+
+<div class="entry">
+    <div class="entry-header">
+        <div class="company">SmartHelio (YC W22)</div>
+        <div class="dates">May 2021 – April 2023</div>
+    </div>
+    <div class="title">Head of Data Science (promoted from Data Scientist)</div>
+    <div class="location">Lausanne, Vaud, Switzerland</div>
+    <ul>
+        <li>Led international data science team as Product Owner, building ML fault detection and digital twin algorithms; defined data strategy and managed product roadmap across Europe and Asia</li>
+    </ul>
+</div>
+
+<div class="entry">
+    <div class="entry-header">
+        <div class="company">Fraunhofer Institute for Solar Energy Systems ISE</div>
+        <div class="dates">February 2017 – February 2021</div>
+    </div>
+    <div class="title">Product Manager & Data Scientist</div>
+    <div class="location">Amsterdam, Netherlands</div>
+</div>
+
+<!-- Education -->
+<h2>Education</h2>
+
+<div class="entry">
+    <div class="entry-header">
+        <div class="school">University of St. Gallen (HSG)</div>
+        <div class="dates">August 2022 – August 2024</div>
+    </div>
+    <div class="degree">Master of Business Administration (MBA)</div>
+    <div class="location">St. Gallen, Switzerland</div>
+    <ul>
+        <li>Focus on international management, leadership, corporate finance, and executive strategy</li>
+        <li>Thesis: "Risk Management for DeFi Liquidity Provisioning"</li>
+    </ul>
+</div>
+
+<div class="entry">
+    <div class="entry-header">
+        <div class="school">University of Amsterdam</div>
+        <div class="dates">February 2018 – Present</div>
+    </div>
+    <div class="degree">PhD Candidate, Data Science (Thesis submitted 2025, defense pending)</div>
+    <div class="location">Amsterdam, Netherlands · In collaboration with Fraunhofer ISE</div>
+    <ul>
+        <li>Focus: Time-series PV power forecasting, optimization algorithms, digital twinning for solar energy systems (ALPRO project)</li>
+    </ul>
+</div>
+
+<div class="entry">
+    <div class="entry-header">
+        <div class="school">EIT InnoEnergy PhD School</div>
+        <div class="dates">April 2018 – March 2021</div>
+    </div>
+    <div class="degree">PhD Candidate – Energy Economics, Smart Grids, Managing Innovation & Entrepreneurship</div>
+</div>
+
+<div class="entry">
+    <div class="entry-header">
+        <div class="school">DTU – Technical University of Denmark</div>
+        <div class="dates">2019</div>
+    </div>
+    <div class="degree">Guest PhD, Data Analysis and Optimization</div>
+</div>
+
+<div class="entry">
+    <div class="entry-header">
+        <div class="school">Technische Universität Berlin</div>
+        <div class="dates">2013 – 2016</div>
+    </div>
+    <div class="degree">Master of Science, Global Production Engineering – Solar and Wind Energy Technologies</div>
+    <div class="location">Berlin, Germany</div>
+</div>
+
+<div class="entry">
+    <div class="entry-header">
+        <div class="school">Tecnológico de Monterrey (ITESM)</div>
+        <div class="dates">2006 – 2010</div>
+    </div>
+    <div class="degree">Bachelor of Science, Mechatronics</div>
+    <div class="location">Morelia, Mexico</div>
+</div>
+
+<!-- Technical Skills -->
+<h2>Technical Skills</h2>
+<div class="skills-list">
+    <div class="skill-category">
+        <strong>AI & Machine Learning:</strong> Agentic AI Systems, Multi-Agent Systems, Large Language Models (LLM), Pipeline Orchestration, MCP (Model Context Protocol), Vector Databases, LLM Evaluation Pipelines, LLM Observability, Machine Learning, Model Optimization
+    </div>
+    <div class="skill-category">
+        <strong>Quantitative & Analytics:</strong> Quantitative Research, Optimization Algorithms, Statistical Modeling, Risk Management
+    </div>
+    <div class="skill-category">
+        <strong>Programming & Frameworks:</strong> Python, React.js, FastAPI, Node.js, Go, Pandas, NumPy, SQL, Version Control (Git)
+    </div>
+    <div class="skill-category">
+        <strong>Cloud & Infrastructure:</strong> Google Cloud Platform (GCP), Vertex AI, Gemini API, Cloud Run, Cloud Build, Amazon Web Services (AWS), Cloudflare, Cloud Firestore
+    </div>
+    <div class="skill-category">
+        <strong>Domain Expertise:</strong> Renewable Energy, Enterprise AI Deployment, DeFi, Cryptocurrency Markets, Project Management, Strategy Consulting
+    </div>
+    <div class="skill-category">
+        <strong>Business & Leadership:</strong> AI Strategy, Digital Transformation, Business Development, Stakeholder Management, Team Leadership, Strategic Initiatives
+    </div>
+</div>
+
+<!-- Languages -->
+<h2>Languages</h2>
+<p>English (Fluent), Spanish (Native), German (B1 - Intermediate)</p>
+
+</body>
+</html>
