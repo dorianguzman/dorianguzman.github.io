@@ -6,3 +6,8 @@ node_modules/
 dist/
 .vscode/
 .idea/
+
+# Working docs, kept local only
+CLAUDE.md
+tasks/
+prototypes/

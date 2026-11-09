@@ -1,44 +1,37 @@
 # dorianguzman.github.io
 
-Tech-focused single-page CV website for Dorian Guzman showcasing expertise in agentic AI systems, quantitative research, and AI product development.
+Personal site of Dorian Guzman: AI systems builder, co-founder and operator. Covers technical work (agentic AI, data science, quantitative research) alongside strategy, operations and go-to-market.
 
-**Live Site:** https://dorianguzman.github.io
+**Live:** https://dorianguzman.github.io
 
-## Tech Stack
-- **Frontend:** Vanilla HTML5, CSS3, JavaScript
-- **Animations:** GSAP 3.12.5 + ScrollTrigger
-- **Design:** Terminal aesthetic with cyberpunk influences (dark slate + green accent)
-- **Deployment:** GitHub Pages (auto-deploy from main branch)
+## Stack
 
-## Features
-- Terminal typing effect on hero section
-- Animated profile image with rotating glowing border
-- Grid background pattern + scan line animation
-- Email wall for CV download (localStorage-based)
-- GSAP scroll animations with progress bar
-- Mobile-responsive design
-- Print-optimized styles
-- Accessibility features (semantic HTML, ARIA labels)
+- Static HTML, CSS and vanilla JavaScript. No build step.
+- GSAP + ScrollTrigger for scroll animation, loaded from cdnjs.
+- Hosted on GitHub Pages from the `main` branch.
 
-## Local Development
+## Run locally
+
 ```bash
-# Serve locally
-cd /Users/dorianguzman/Work/repo/dorianguzman.github.io
 python3 -m http.server 8000
-# Visit http://localhost:8000
+# open http://localhost:8000
 ```
 
-## Deployment
-Push to `main` branch → auto-deploys to GitHub Pages (live in 1-2 minutes)
+## Deploy
 
-## Project Structure
+Push to `main`. GitHub Pages publishes within a minute or two.
+
+## Layout
+
 ```
-dorianguzman.github.io/
-├── index.html           # Main CV page
-├── css/style.css        # Styles (dark slate + green accent theme)
-├── js/main.js          # GSAP animations + email wall
-├── assets/
-│   ├── images/profile.png
-│   └── pdf/            # CV PDF (to be added)
-└── tasks/              # Project management docs
+index.html     the page
+css/           styles
+js/            animation and contact form
+assets/        images, favicons, video, CV
+llms.txt       summary for AI crawlers
 ```
+
+## Links
+
+- LinkedIn: https://www.linkedin.com/in/dorianguzmanrazo/
+- GitHub: https://github.com/dorianguzman
