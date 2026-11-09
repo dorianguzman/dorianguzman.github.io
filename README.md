@@ -4,10 +4,6 @@ Personal site of Dorian Guzman: AI systems builder, co-founder and operator. One
 
 **Live:** https://dorianguzman.github.io
 
-## Design
-
-Swiss split layout: off-white, ink and one ultramarine accent, set in Inter. The hero is split in two halves, "I build AI systems," and "and the business around them.", which drift toward each other as you scroll. Blue marks only the business half of the split and actions.
-
 ## Stack
 
 - Static HTML, CSS and vanilla JavaScript. No build step.
