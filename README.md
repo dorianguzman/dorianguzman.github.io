@@ -51,7 +51,7 @@ flowchart LR
 | Hosting | GitHub Pages | Publishes `main` on every push |
 | AI discovery | `llms.txt` | Plain-text summary of the page for AI crawlers |
 
-Invariants: no build step; content must be complete without JavaScript and with reduced motion; page copy, `llms.txt` and the CV must agree; no em dash in anything visible.
+Invariants: no build step; content must be complete without JavaScript and with reduced motion; page copy, `llms.txt` and the CV must agree.
 
 ## Project structure
 
