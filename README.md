@@ -72,13 +72,11 @@ dorianguzman.github.io/
 
 ## Getting started
 
-**Prerequisites:** Python 3 (or any static file server) and Git.
+**Prerequisites:** Python 3 (or any static file server).
 
 ```sh
-git clone https://github.com/dorianguzman/dorianguzman.github.io.git  # get the code
-cd dorianguzman.github.io                                            # enter the project
-python3 -m http.server 8000                                          # serve it at http://localhost:8000
-git push origin main                                                 # publish: GitHub Pages deploys main
+python3 -m http.server 8000   # serve it at http://localhost:8000
+git push origin main          # publish: GitHub Pages deploys main
 ```
 
 ## Status
