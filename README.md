@@ -1,44 +1,92 @@
 # dorianguzman.github.io
 
-Personal site of Dorian Guzman: AI systems builder, co-founder and operator. One page that shows both sides: technical work (agentic AI, data science, quantitative research) and strategy, operations and go-to-market.
+**A one-page profile of Dorian Guzman's work across AI engineering, strategy and go-to-market, for clients, partners and employers.**
 
-**Live:** https://dorianguzman.github.io
+https://github.com/dorianguzman/dorianguzman.github.io
 
-## Stack
+![HTML5](https://img.shields.io/badge/HTML5-single_page-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-tokenised_styles-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-form_and_motion-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![GSAP](https://img.shields.io/badge/GSAP_3.12.5-scroll_motion-0AE448?style=for-the-badge&logo=greensock&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-hosting-222222?style=for-the-badge&logo=githubpages&logoColor=white)
 
-- Static HTML, CSS and vanilla JavaScript. No build step.
-- GSAP 3.12.5 + ScrollTrigger, vendored in `js/vendor/` (no CDN at runtime).
-- Inter from Google Fonts. Hosted on GitHub Pages from `main`.
+People looking for help with AI usually meet two kinds of profiles: engineers who build but never own the commercial result, and strategists who advise but never ship. This site bets that one page can show both in a single person, with the proof in numbers and a clear way to start a conversation. Live at https://dorianguzman.github.io.
 
-## How the code is organised
+## How it works
 
-- `css/style.css`: every colour, size, spacing and duration is a token in `:root`.
-- `js/main.js`: the contact form and all motion. Timings live in one `MOTION` object; each effect is one small function.
-- Motion is opt-in from the markup:
-  - `data-split`: headline rises word by word
-  - `data-rise`: block fades up as it enters
-  - `.count` with `data-to`: number counts up
-- With reduced motion or without JavaScript, everything is simply visible.
-
-## Assets
-
-- `assets/favicon.svg` is the single source for the favicon PNGs and the Apple touch icon.
-- `assets/images/og-image.png` (1200 x 630) is rendered from the site's own stylesheet.
-- `assets/cv/dorian-guzman-cv.pdf` is the CV linked from the page.
-- `llms.txt` summarises the page for AI crawlers; keep it in sync with the copy.
-
-## Run locally
-
-```bash
-python3 -m http.server 8000
-# open http://localhost:8000
+```mermaid
+flowchart LR
+    A[Visitor opens the page] --> B{Reduced motion<br/>or no JavaScript?}
+    B -- No --> C[Animated hero<br/>and reveals]
+    B -- Yes --> D[Static page,<br/>all content visible]
+    C --> E[Proof, disciplines,<br/>experience, education]
+    D --> E
+    E --> F{Next step}
+    F --> G[(CV PDF)]
+    F --> H[WhatsApp message]
+    F --> I[Email, LinkedIn, GitHub]
 ```
 
-## Deploy
+Motion is an enhancement only: every word on the page is readable and every link is reachable with motion off, without JavaScript and with the keyboard alone.
 
-Push to `main`. GitHub Pages publishes within a minute or two.
+## Architecture
 
-## Links
+```mermaid
+flowchart LR
+    Browser[Browser] --> Pages[GitHub Pages<br/>static files]
+    Browser --> Fonts[Google Fonts<br/>Inter]
+    Browser --> WA[wa.me<br/>WhatsApp]
+    Crawlers[AI crawlers] --> Pages
+```
 
-- LinkedIn: https://www.linkedin.com/in/dorianguzmanrazo/
-- GitHub: https://github.com/dorianguzman
+## Technology
+
+| Area | Technology | Use |
+|---|---|---|
+| Page | HTML5 | One semantic page with schema.org Person data |
+| Styles | CSS3 | Layout and look; every value is a token in `:root` |
+| Behaviour | Vanilla JavaScript | Contact form and scroll motion, no framework |
+| Motion | GSAP 3.12.5 + ScrollTrigger | Scroll-driven reveals, vendored so nothing loads from a CDN |
+| Type | Google Fonts (Inter) | The only typeface |
+| Hosting | GitHub Pages | Publishes `main` on every push |
+| AI discovery | `llms.txt` | Plain-text summary of the page for AI crawlers |
+
+Invariants: no build step; content must be complete without JavaScript and with reduced motion; page copy, `llms.txt` and the CV must agree; no em dash in anything visible.
+
+## Project structure
+
+```text
+dorianguzman.github.io/
+├── index.html          the page
+├── llms.txt            summary of the page for AI crawlers
+├── css/
+│   └── style.css       all styles, values as tokens in :root
+├── js/
+│   ├── main.js         contact form and scroll motion
+│   └── vendor/         GSAP and ScrollTrigger, pinned version
+└── assets/
+    ├── cv/             downloadable CV (PDF)
+    ├── images/         profile photo and share image
+    └── favicon.svg     source for every favicon size
+```
+
+## Getting started
+
+**Prerequisites:** Python 3 (or any static file server) and Git.
+
+```sh
+git clone https://github.com/dorianguzman/dorianguzman.github.io.git  # get the code
+cd dorianguzman.github.io                                            # enter the project
+python3 -m http.server 8000                                          # serve it at http://localhost:8000
+git push origin main                                                 # publish: GitHub Pages deploys main
+```
+
+## Status
+
+| Area | State |
+|---|---|
+| Page design and content | Live, 2026-11-09 |
+| Motion, layout and accessibility checks in Chrome (desktop and phone emulation) | Done, 2026-11-09 |
+| Testing on Safari and real phones | Not started |
+
+Created by [Dorian Guzman](https://github.com/dorianguzman)
