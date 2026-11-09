@@ -70,15 +70,6 @@ dorianguzman.github.io/
     └── favicon.svg     source for every favicon size
 ```
 
-## Getting started
-
-**Prerequisites:** Python 3 (or any static file server).
-
-```sh
-python3 -m http.server 8000   # serve it at http://localhost:8000
-git push origin main          # publish: GitHub Pages deploys main
-```
-
 ## Status
 
 | Area | State |
