@@ -1,357 +1,198 @@
-// ==========================================
-// MINIMALISTIC PROFESSIONAL CV - DORIAN GUZMAN
-// Simplified GSAP animations with subtle effects
-// ==========================================
+/* Dorian Guzman: contact form + motion.
+   Motion runs on GSAP + ScrollTrigger (vendored in js/vendor). Markup opts in declaratively:
+   [data-split] headlines rise word by word, [data-rise] blocks rise as they enter, .count numbers
+   count up. Without JS, or with reduced motion, every element is simply visible. */
+(() => {
+  'use strict';
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+  /* ================================================================== Settings
+     The one place to retune behaviour. Colours and sizes live in css/style.css. */
+  const CONTACT = {
+    whatsapp: 'https://wa.me/4915739511230',
+    message: (name, company) => `Hi Dorian, I'm ${name} from ${company}. `,
+  };
+  const MOTION = {
+    query: {
+      full: '(prefers-reduced-motion: no-preference) and (min-width: 45.01rem)',
+      lite: '(prefers-reduced-motion: no-preference) and (max-width: 45rem)',
+    },
+    cls: { gate: 'motion' },
+    scrub: 0.6,
+    intro: { duration: 1.1, stagger: 0.07, ease: 'power4.out', wipe: 1.0 },
+    words: { duration: 0.9, stagger: 0.04, ease: 'power3.out', start: 'top 85%' },
+    reveal: { y: 40, duration: 0.9, stagger: 0.08, ease: 'power3.out', start: 'top 88%' },
+    count: { duration: 1.6, ease: 'power2.out', start: 'top 85%' },
+    cycle: { roles: ['Engineer', 'Strategist', 'Operator', 'Closer'], hold: 1.8, swap: 0.45 },
+    converge: { from: 140, start: 'top 90%', end: 'top 35%' },
+  };
 
-// ==========================================
-// SCROLL-DRIVEN VIDEO PLAYBACK
-// ==========================================
-const video = document.getElementById('scrollVideo');
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+  const root = document.documentElement;
 
-// Force video to start loading immediately
-video.load();
+  /* ================================================================== Contact form */
+  const form = $('#whatsapp-form');
+  if (form) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const values = new FormData(form);
+      const name = String(values.get('name') || '').trim();
+      const company = String(values.get('company') || '').trim();
+      if (!name || !company) { $(!name ? '#name' : '#company', form).focus(); return; }
+      const text = encodeURIComponent(CONTACT.message(name, company));
+      window.open(`${CONTACT.whatsapp}?text=${text}`, '_blank', 'noopener,noreferrer');
+    });
+  }
 
-// Set video to frame 0 immediately (don't wait for metadata)
-video.currentTime = 0;
+  /* ================================================================== Shared primitives */
 
-// Create ScrollTrigger immediately (don't wait for loadedmetadata)
-ScrollTrigger.create({
-    trigger: 'body',
-    start: 'top top',
-    end: 'bottom bottom',
-    scrub: 0.5,
-    onUpdate: (self) => {
-        // Map scroll progress to video time
-        const targetTime = self.progress * video.duration;
+  /* Wrap each word in a mask (span.w > span.w__in) so it can rise into view. <br> stays as is. */
+  function splitWords(el) {
+    const unit = (node) => {
+      const w = document.createElement('span'), inner = document.createElement('span');
+      w.className = 'w'; inner.className = 'w__in';
+      inner.append(node); w.append(inner);
+      return w;
+    };
+    const parts = [];
+    [...el.childNodes].forEach((n) => {
+      if (n.nodeType !== Node.TEXT_NODE) { parts.push(n.nodeName === 'BR' ? n : unit(n)); return; }
+      n.textContent.split(/(\s+)/).forEach((t) => {
+        if (t) parts.push(/^\s+$/.test(t) ? document.createTextNode(t) : unit(document.createTextNode(t)));
+      });
+    });
+    el.replaceChildren(...parts);
+    return $$('.w__in', el);
+  }
 
-        // Only update if video is ready and time is valid
-        if (video.readyState >= 2 && !isNaN(targetTime)) {
-            video.currentTime = targetTime;
-        }
+  /* Calm rise for every [data-rise] block, batched so neighbours stagger together */
+  function reveal(els) {
+    if (!els.length) return;
+    const R = MOTION.reveal;
+    gsap.set(els, { opacity: 0, y: R.y });   /* opacity, not autoAlpha: hidden content must stay keyboard reachable */
+    ScrollTrigger.batch(els, {
+      start: R.start, once: true,
+      onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: R.duration, stagger: R.stagger, ease: R.ease, overwrite: true }),
+    });
+    /* Focus that lands in a row before it has scrolled in reveals it at once */
+    els.forEach((el) => el.addEventListener('focusin', () => gsap.to(el, { opacity: 1, y: 0, duration: R.duration / 3, overwrite: true }), { once: true }));
+  }
+
+  /* ================================================================== Scenes */
+
+  /* Hero: the blue half wipes in, then both halves rise word by word */
+  function heroIntro(words) {
+    const I = MOTION.intro;
+    gsap.set(words, { yPercent: 110 });
+    root.classList.remove(MOTION.cls.gate);   /* words are masked now; the pre-paint gate can lift */
+    gsap.set('.right-half', { clipPath: 'inset(0 0 0 100%)' });
+    gsap.set(['.header', '.hero-bottom > *'], { opacity: 0, y: 16 });
+    gsap.timeline({ defaults: { ease: I.ease } })
+      .to('.header', { opacity: 1, y: 0, duration: 0.6 })
+      .to('.right-half', { clipPath: 'inset(0 0 0 0%)', duration: I.wipe }, '<0.1')
+      .to(words, { yPercent: 0, duration: I.duration, stagger: I.stagger }, '<0.15')
+      .to('.hero-bottom > *', { opacity: 1, y: 0, duration: 0.9, stagger: 0.12 }, '-=0.7');
+  }
+
+  /* Hero on scroll: the two halves drift toward each other, Build meets Market */
+  function heroConverge() {
+    const hero = $('.hero');
+    const travel = getComputedStyle(root).getPropertyValue('--split-travel').trim();
+    gsap.fromTo(hero, { '--split-inset': '0vw' }, {
+      '--split-inset': travel, ease: 'none',
+      scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: MOTION.scrub },
+    });
+  }
+
+  /* Headlines below the fold rise word by word as they enter */
+  function wordsRise(el, words) {
+    const W = MOTION.words;
+    gsap.set(words, { yPercent: 110 });
+    gsap.to(words, { yPercent: 0, duration: W.duration, stagger: W.stagger, ease: W.ease, scrollTrigger: { trigger: el, start: W.start, once: true } });
+  }
+
+  /* "In one seat: ..." steps through the roles once, then settles on all of them together.
+     It never loops: endless motion beside reading text is a distraction (and WCAG 2.2.2). */
+  function roleCycle() {
+    const word = $('.cycler-word'), all = $('.cycler-all');
+    if (!word || !all) return;
+    const C = MOTION.cycle;
+    const out = { yPercent: -100, opacity: 0, duration: C.swap, ease: 'power2.in' };
+    const into = [{ yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: C.swap, ease: 'power2.out' }];
+    gsap.set(all, { opacity: 0 });
+    word.textContent = C.roles[0];
+    const tl = gsap.timeline();
+    C.roles.slice(1).forEach((role) => {
+      tl.to(word, out, `+=${C.hold}`).call(() => { word.textContent = role; }).fromTo(word, ...into);
+    });
+    tl.to(word, out, `+=${C.hold}`).fromTo(all, ...into);
+    return () => { word.textContent = ''; gsap.set(all, { clearProps: 'all' }); };
+  }
+
+  /* Proof numbers count up from zero, once */
+  function countUp(els) {
+    const K = MOTION.count;
+    els.forEach((el) => {
+      const to = Number(el.dataset.to);
+      const state = { v: 0 };
+      el.textContent = '0';
+      gsap.to(state, {
+        v: to, duration: K.duration, ease: K.ease,
+        scrollTrigger: { trigger: el, start: K.start, once: true },
+        onUpdate: () => { el.textContent = String(Math.round(state.v)); },
+      });
+    });
+    return () => els.forEach((el) => { el.textContent = el.dataset.to; });
+  }
+
+  /* Discipline arrows travel in from both sides and meet as the panels scroll up */
+  function arrowsConverge() {
+    const V = MOTION.converge;
+    const grid = $('.discipline-grid');
+    const st = { trigger: grid, start: V.start, end: V.end, scrub: MOTION.scrub };
+    gsap.fromTo('.converge span:first-child', { xPercent: -V.from }, { xPercent: 0, ease: 'none', scrollTrigger: st });
+    gsap.fromTo('.converge span:last-child', { xPercent: V.from }, { xPercent: 0, ease: 'none', scrollTrigger: { ...st } });
+  }
+
+  /* Thin progress bar under the viewport top */
+  function progressBar() {
+    gsap.to('.progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
+  }
+
+  /* ================================================================== Start-up */
+  if (!(window.gsap && window.ScrollTrigger)) { root.classList.remove(MOTION.cls.gate); return; }
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* Split every headline once, up front; scenes only animate the words */
+  const splits = $$('[data-split]').map((el) => ({ el, words: splitWords(el), hero: !!el.closest('.hero') }));
+  const heroWords = splits.filter((s) => s.hero).flatMap((s) => s.words);
+
+  let introPlayed = false;
+  const mm = gsap.matchMedia();
+  mm.add({ full: MOTION.query.full, lite: MOTION.query.lite }, (ctx) => {
+    const { full } = ctx.conditions;
+    const cleanups = [];
+    try {
+      if (!introPlayed) { heroIntro(heroWords); introPlayed = true; }
+      if (full) heroConverge();
+      splits.filter((s) => !s.hero).forEach((s) => wordsRise(s.el, s.words));
+      cleanups.push(roleCycle(), countUp($$('.count')));
+      arrowsConverge();
+      progressBar();
+      reveal($$('[data-rise]'));
+    } catch (err) {
+      console.error(err);
+      setTimeout(() => mm.revert(), 0);
     }
-});
+    return () => cleanups.forEach((fn) => fn && fn());
+  });
 
-// Log when video is ready
-video.addEventListener('loadedmetadata', () => {
-    console.log('✓ Video loaded - Duration:', video.duration, 'seconds');
-    // Ensure video starts at frame 0
-    video.currentTime = 0;
-});
+  /* No motion query matched (reduced motion): show everything as authored */
+  if (!introPlayed) root.classList.remove(MOTION.cls.gate);
 
-// Handle video loading errors
-video.addEventListener('error', (e) => {
-    console.error('✗ Video failed to load:', e);
-});
-
-// ==========================================
-// HERO ANIMATIONS - Apple-Level Sophistication
-// ==========================================
-
-// Set initial states - all hero elements start invisible with transforms
-gsap.set('.profile-img', {opacity: 0, scale: 0.8});
-gsap.set('.hero-name', {opacity: 0, y: 40});
-gsap.set('.hero-headline', {opacity: 0, y: 30});
-gsap.set('.hero-credentials', {opacity: 0, y: 20});
-gsap.set('.link-btn', {opacity: 0, y: 20});
-
-const heroTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-// Profile image entrance with elastic bounce
-heroTimeline.to('.profile-img', {
-    scale: 1,
-    opacity: 1,
-    duration: 1,
-    ease: 'back.out(1.4)'
-});
-
-// Name entrance - dramatic reveal
-heroTimeline.to('.hero-name', {
-    y: 0,
-    opacity: 1,
-    duration: 1
-}, '-=0.5');
-
-// Headline stagger - refined timing
-heroTimeline.to('.hero-headline', {
-    y: 0,
-    opacity: 1,
-    duration: 0.8
-}, '-=0.6');
-
-// Credentials subtle entrance
-heroTimeline.to('.hero-credentials', {
-    y: 0,
-    opacity: 1,
-    duration: 0.7
-}, '-=0.5');
-
-// Buttons stagger - smooth cascade (appear LAST after credentials)
-heroTimeline.to('.link-btn', {
-    y: 0,
-    opacity: 1,
-    duration: 0.6,
-    stagger: 0.1
-}, '-=0.4');
-
-// ==========================================
-// SCROLL INDICATOR ANIMATIONS
-// ==========================================
-
-// Bounce animation for arrow
-gsap.to('.scroll-arrow', {
-    y: 8,
-    duration: 0.8,
-    ease: 'sine.inOut',
-    yoyo: true,
-    repeat: -1
-});
-
-// Fade in after hero animation completes
-gsap.from('.scroll-indicator', {
-    opacity: 0,
-    y: -20,
-    duration: 0.8,
-    delay: 2.5, // After hero animation
-    ease: 'power2.out'
-});
-
-// Fade out on scroll
-ScrollTrigger.create({
-    trigger: '.hero',
-    start: 'top top',
-    end: '+=200',
-    scrub: true,
-    onUpdate: (self) => {
-        gsap.to('.scroll-indicator', {
-            opacity: 0.8 - (self.progress * 0.8),
-            y: self.progress * 30
-        });
-    }
-});
-
-// ==========================================
-// CONTINUOUS FLOAT ANIMATION - Profile Image
-// ==========================================
-gsap.to('.profile-img', {
-    y: -10,
-    duration: 3,
-    yoyo: true,
-    repeat: -1,
-    ease: 'sine.inOut'
-});
-
-// ==========================================
-// SCROLL PARALLAX - Hero Elements
-// Initialized AFTER hero timeline completes to prevent conflicts
-// ==========================================
-heroTimeline.eventCallback('onComplete', () => {
-    ScrollTrigger.create({
-        trigger: '.hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1,
-        onUpdate: (self) => {
-            const progress = self.progress;
-
-            // Profile scales down and fades (starts at scale:1, opacity:1 when progress=0)
-            gsap.set('.profile-img', {
-                scale: 1 - (progress * 0.1),
-                opacity: 1 - (progress * 0.4)
-            });
-
-            // Name moves up (parallax effect) - starts at y:0 when progress=0
-            gsap.set('.hero-name', {
-                y: -progress * 40
-            });
-
-            // Headline subtle parallax - starts at y:0, opacity:1 when progress=0
-            gsap.set('.hero-headline, .hero-credentials', {
-                y: -progress * 20,
-                opacity: 1 - (progress * 0.5)
-            });
-
-            // Buttons fade faster - starts at opacity:1 when progress=0, fades to 0.2
-            gsap.set('.link-btn', {
-                opacity: 1 - (progress * 0.8)
-            });
-        }
-    });
-});
-
-// ==========================================
-// BUTTON HOVER EFFECTS - GSAP Enhanced
-// ==========================================
-document.querySelectorAll('.link-btn').forEach(button => {
-    button.addEventListener('mouseenter', () => {
-        gsap.to(button, {
-            scale: 1.02,
-            duration: 0.3,
-            ease: 'power2.out'
-        });
-    });
-
-    button.addEventListener('mouseleave', () => {
-        gsap.to(button, {
-            scale: 1,
-            duration: 0.3,
-            ease: 'power2.out'
-        });
-    });
-});
-
-// ==========================================
-// SECTION TITLE ANIMATIONS - Fade in on scroll
-// ==========================================
-gsap.utils.toArray('.section-title').forEach(title => {
-    gsap.from(title, {
-        scrollTrigger: {
-            trigger: title,
-            start: 'top 80%',
-            end: 'top 60%',
-            scrub: 1
-        },
-        y: 20,
-        opacity: 0
-    });
-});
-
-// ==========================================
-// SKILLS & IMPACT ANIMATIONS - Staggered reveal
-// ==========================================
-// Set initial state for expertise categories
-gsap.set('.expertise-category', {opacity: 0, y: 30});
-
-// Animate to visible state on scroll
-gsap.to('.expertise-category', {
-    scrollTrigger: {
-        trigger: '.skills-impact',
-        start: 'top 80%',
-        toggleActions: 'play none none none'
-    },
-    y: 0,
-    opacity: 1,
-    duration: 0.8,
-    stagger: 0.15,
-    ease: 'power2.out'
-});
-
-// ==========================================
-// EXPERIENCE CARD ANIMATIONS - Smooth reveal
-// ==========================================
-// Set initial state for experience cards
-gsap.set('.experience-card', {opacity: 0, y: 30});
-
-// Animate to visible state on scroll
-gsap.to('.experience-card', {
-    scrollTrigger: {
-        trigger: '.experience',
-        start: 'top 80%',
-        toggleActions: 'play none none none'
-    },
-    y: 0,
-    opacity: 1,
-    duration: 0.8,
-    stagger: 0.15,
-    ease: 'power2.out'
-});
-
-// ==========================================
-// EDUCATION ANIMATIONS - Clean entrance
-// ==========================================
-// Set initial state for education cards
-gsap.set('.education-card', {opacity: 0, y: 30});
-
-// Animate to visible state on scroll
-gsap.to('.education-card', {
-    scrollTrigger: {
-        trigger: '.education',
-        start: 'top 80%',
-        toggleActions: 'play none none none'
-    },
-    y: 0,
-    opacity: 1,
-    duration: 0.8,
-    stagger: 0.2,
-    ease: 'power2.out'
-});
-
-// ==========================================
-// CONTACT SECTION ANIMATIONS - Gentle reveal
-// ==========================================
-gsap.from('.contact-content', {
-    scrollTrigger: {
-        trigger: '.contact',
-        start: 'top 70%',
-        end: 'top 50%',
-        scrub: 1
-    },
-    y: 20,
-    opacity: 0
-});
-
-// ==========================================
-// WHATSAPP FORM HANDLER
-// ==========================================
-const whatsappForm = document.getElementById('whatsapp-form');
-
-if (whatsappForm) {
-    whatsappForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const name = document.getElementById('contact-name').value.trim();
-        const company = document.getElementById('contact-company').value.trim();
-
-        // Build WhatsApp message
-        let message;
-        if (company) {
-            message = `Hey Dorian, I am ${name} from ${company}. I found your website and I am interested in connecting.`;
-        } else {
-            message = `Hey Dorian, I am ${name}. I found your website and I am interested in connecting.`;
-        }
-
-        // Encode message for URL
-        const encodedMessage = encodeURIComponent(message);
-
-        // WhatsApp URL with phone number and pre-filled message
-        const whatsappURL = `https://wa.me/4915739511230?text=${encodedMessage}`;
-
-        // Open WhatsApp in new tab
-        window.open(whatsappURL, '_blank');
-    });
-}
-
-// ==========================================
-// SMOOTH SCROLL TO SECTIONS
-// ==========================================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-
-        if (targetElement) {
-            gsap.to(window, {
-                duration: 1,
-                scrollTo: {
-                    y: targetElement,
-                    offsetY: 50
-                },
-                ease: 'power3.inOut'
-            });
-        }
-    });
-});
-
-// ==========================================
-// PERFORMANCE: Disable animations on slow devices
-// ==========================================
-if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    gsap.globalTimeline.clear();
-    ScrollTrigger.getAll().forEach(st => st.kill());
-}
-
-console.log('✓ CV loaded successfully');
+  /* Measurements change as the photo and fonts settle */
+  let soon = 0;
+  const refreshSoon = () => { clearTimeout(soon); soon = setTimeout(() => ScrollTrigger.refresh(), 150); };
+  $$('img').forEach((img) => { if (!img.complete) img.addEventListener('load', refreshSoon, { once: true }); });
+  if (document.fonts) document.fonts.ready.then(refreshSoon);
+})();

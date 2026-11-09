@@ -1,14 +1,35 @@
 # dorianguzman.github.io
 
-Personal site of Dorian Guzman: AI systems builder, co-founder and operator. Covers technical work (agentic AI, data science, quantitative research) alongside strategy, operations and go-to-market.
+Personal site of Dorian Guzman: AI systems builder, co-founder and operator. One page that shows both sides: technical work (agentic AI, data science, quantitative research) and strategy, operations and go-to-market.
 
 **Live:** https://dorianguzman.github.io
+
+## Design
+
+Swiss split layout: off-white, ink and one ultramarine accent, set in Inter. The hero is split in two halves, "I build AI systems," and "and the business around them.", which drift toward each other as you scroll. Blue marks only the business half of the split and actions.
 
 ## Stack
 
 - Static HTML, CSS and vanilla JavaScript. No build step.
-- GSAP + ScrollTrigger for scroll animation, loaded from cdnjs.
-- Hosted on GitHub Pages from the `main` branch.
+- GSAP 3.12.5 + ScrollTrigger, vendored in `js/vendor/` (no CDN at runtime).
+- Inter from Google Fonts. Hosted on GitHub Pages from `main`.
+
+## How the code is organised
+
+- `css/style.css`: every colour, size, spacing and duration is a token in `:root`.
+- `js/main.js`: the contact form and all motion. Timings live in one `MOTION` object; each effect is one small function.
+- Motion is opt-in from the markup:
+  - `data-split`: headline rises word by word
+  - `data-rise`: block fades up as it enters
+  - `.count` with `data-to`: number counts up
+- With reduced motion or without JavaScript, everything is simply visible.
+
+## Assets
+
+- `assets/favicon.svg` is the single source for the favicon PNGs and the Apple touch icon.
+- `assets/images/og-image.png` (1200 x 630) is rendered from the site's own stylesheet.
+- `assets/cv/dorian-guzman-cv.pdf` is the CV linked from the page.
+- `llms.txt` summarises the page for AI crawlers; keep it in sync with the copy.
 
 ## Run locally
 
@@ -20,16 +41,6 @@ python3 -m http.server 8000
 ## Deploy
 
 Push to `main`. GitHub Pages publishes within a minute or two.
-
-## Layout
-
-```
-index.html     the page
-css/           styles
-js/            animation and contact form
-assets/        images, favicons, video, CV
-llms.txt       summary for AI crawlers
-```
 
 ## Links
 
